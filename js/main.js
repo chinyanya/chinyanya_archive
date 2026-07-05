@@ -15,7 +15,7 @@ async function loadWorks() {
     const rows = parseCSV(csvText);
     const products = groupIntoProducts(rows);
 
-    renderWorks(products);
+    renderWorks(shuffle(products));
   } catch (error) {
     console.error(error);
     workGrid.innerHTML = `
@@ -66,6 +66,17 @@ function splitCSVLine(line) {
   return result;
 }
 
+function shuffle(array) {
+  const result = [...array];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
+}
+
 function groupIntoProducts(rows) {
   const productsByNo = new Map();
 
@@ -96,7 +107,9 @@ function renderWorks(products) {
 
   products.forEach((product) => {
     const isSale = String(product.is_sale).toLowerCase() === "true";
-    const mainImage = product.images[0];
+    const mainImage = product.images.find((image) => !image.is_picture);
+
+    if (!mainImage) return;
 
     const item = document.createElement("figure");
     item.className = "work-item";
@@ -109,12 +122,15 @@ function renderWorks(products) {
     item.dataset.exhibition = product.exhibition;
     item.dataset.isSale = isSale;
 
+    const showNameOverlay = !mainImage.is_picture && isSale;
+
     item.innerHTML = `
       <img
         src="${WORK_IMAGE_BASE_PATH}${mainImage.file_name}"
         alt="${product.name || "archive image"}"
         loading="lazy"
       />
+      ${showNameOverlay ? `<figcaption class="work-name-overlay"><span>${product.name}</span></figcaption>` : ""}
     `;
 
     if (isSale) {
