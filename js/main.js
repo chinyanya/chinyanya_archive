@@ -12,9 +12,10 @@ async function loadWorks() {
     }
 
     const csvText = await response.text();
-    const works = parseCSV(csvText);
+    const rows = parseCSV(csvText);
+    const products = groupIntoProducts(rows);
 
-    renderWorks(works);
+    renderWorks(products);
   } catch (error) {
     console.error(error);
     workGrid.innerHTML = `
@@ -65,31 +66,59 @@ function splitCSVLine(line) {
   return result;
 }
 
-function renderWorks(works) {
+function groupIntoProducts(rows) {
+  const productsByNo = new Map();
+
+  rows.forEach((row) => {
+    if (!productsByNo.has(row.no)) {
+      productsByNo.set(row.no, {
+        no: row.no,
+        name: row.name,
+        memo: row.memo,
+        price: row.price,
+        exhibition: row.exhibition,
+        is_sale: row.is_sale,
+        images: [],
+      });
+    }
+
+    productsByNo.get(row.no).images.push({
+      file_name: row.file_name,
+      is_picture: String(row.is_picture).toLowerCase() === "true",
+    });
+  });
+
+  return Array.from(productsByNo.values());
+}
+
+function renderWorks(products) {
   workGrid.innerHTML = "";
 
-  works.forEach((work) => {
-    const isSale = String(work.is_sale).toLowerCase() === "true";
+  products.forEach((product) => {
+    const isSale = String(product.is_sale).toLowerCase() === "true";
+    const mainImage = product.images[0];
 
     const item = document.createElement("figure");
     item.className = "work-item";
     if (isSale) item.classList.add("sale");
 
-    item.dataset.name = work.name;
-    item.dataset.memo = work.memo;
-    item.dataset.exhibition = work.exhibition;
+    item.dataset.no = product.no;
+    item.dataset.name = product.name;
+    item.dataset.memo = product.memo;
+    item.dataset.price = product.price;
+    item.dataset.exhibition = product.exhibition;
     item.dataset.isSale = isSale;
 
     item.innerHTML = `
       <img
-        src="${WORK_IMAGE_BASE_PATH}${work.file_name}"
-        alt="${work.name || "archive image"}"
+        src="${WORK_IMAGE_BASE_PATH}${mainImage.file_name}"
+        alt="${product.name || "archive image"}"
         loading="lazy"
       />
     `;
 
     if (isSale) {
-      item.addEventListener("click", () => openSaleDetail(work));
+      item.addEventListener("click", () => openSaleDetail(product));
     }
 
     workGrid.appendChild(item);
