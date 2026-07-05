@@ -1,30 +1,30 @@
-no,name,memo,price,exhibition,is_sale,is_picture,file_name
-9,민트라떼에 초코 한 스푼,유포지 매트펄,3500,문구전2026,true,false,mintcore_sticker.jpg
-3,말차라떼에 딸기 두 방울 씰스티커,유포지 무광,3200,문구전2026,true,false,matcha_latte_strawberry_sticker.jpg
-11,블루 레몬 에이드와 바다,유포지 무광,3200,문구전2026,true,false,swimsuit_1_sticker.jpg
-12,수박 주스와 꽃 한 송이,유포지 무광,3200,문구전2026,true,false,swimsuit_2_sticker.jpg
-15,우주 아쿠아리움 냥이끼끼 씰스티커,유포지 무광,3200,수일코2026,true,false,space_aquarium_kitty.jpg
-1,레드핑크 딸기 끼끼 씰스티커,유포지 무광,3000,수일코2026,true,false,redpink_strawberry_kiki.jpg
-10,소다 메론 체리 냥이끼끼 씰스티커,유포지 무광,3000,수일코2026,true,false,soda_melon_cherry_kitty.jpg
-17,키치메디컬 냥이끼끼 씰스티커,유포지 무광,3000,수일코2026,true,false,kitsch_medical_kitty.jpg
-4,딸기 모조지,칼선 모조지 세트 1/4,2000,수일코2026,true,false,mojoji_1.jpg
-5,해마 모조지,칼선 모조지 세트 2/4,2000,수일코2026,true,false,mojoji_2.jpg
-6,주사기 모조지,칼선 모조지 세트 3/4,2000,수일코2026,true,false,mojoji_3.jpg
-7,메론 소다 모조지,칼선 모조지 세트 4/4,2000,수일코2026,true,false,mojoji_4.jpg
-8,푸딩 모조지,모조지 덤스티커,500,수일코2026,true,false,mojoji_5.jpg
-2,레몬코어 미니 씰스티커,유포지 무광 덤스티커,0,문구전2026,true,false,lemontang_seals.jpg
-13,여름날 미니 씰스티커1,유포지 무광 덤스티커,0,수일코2026,true,false,summer_mini_seal_1.jpg
-14,여름날 미니 씰스티커2,유포지 무광 덤스티커,0,수일코2026,true,false,summer_mini_seal_2.jpg
-16,인스타그램 팔로우 이벤트 도무송,덤도무송스티커,0,수일코2026,true,false,inpal_domusong.jpg
-101,블루 레몬 에이드와 바다 배경 사진,,,,false,false,bg_adil-photos-seascape-4788749.jpg
-102,블루 레몬 에이드와 바다 배경 사진,,,,false,false,bg_claudia14-dolphin-203875.jpg
-104,수박 주스와 꽃 한 송이 배경 사진,,,,false,false,bg_dyunmv-trees-5033072.jpg
-105,레몬코어 미니 씰스티커 배경 사진,,,,false,false,bg_hans-lemon-1117565.jpg
-106,수박 주스와 꽃 한 송이 배경 사진,,,,false,false,bg_jancickal-palm-5408169.jpg
-107,레몬코어 미니 씰스티커 배경 사진,,,,false,false,bg_ptrabattoni-summer-361112.jpg
-108,레몬코어 미니 씰스티커 배경 사진,,,,false,false,bg_queven-lemon-4982692.jpg
-109,수박 주스와 꽃 한 송이 배경 사진,,,,false,false,bg_raitrainer-palm-trees-383498.jpg
-110,블루 레몬 에이드와 바다 배경 사진,,,,false,false,bg_ranerd-sea-5751723.jpg
-111,민트라떼에 초코 한 스푼 배경 사진,,,,false,false,bg_sabinevanerp-doors-3117027.jpg
-112,블루 레몬 에이드와 바다 배경 사진,,,,false,false,bg_stocksnap-beach-2562563.jpg
-113,수박 주스와 꽃 한 송이 배경 사진,,,,false,false,bg_walkerssk-la-digue-4710130.jpg
+no,name,memo,price,exhibition,category,product,file_name
+1,민트라떼에 초코 한 스푼 씰스티커,유포지 매트펄 · 97mm x 156mm,3500,문구전2026,1,1,mintcore_sticker.jpg
+2,말차라떼에 딸기 두 방울 씰스티커,유포지 무광 · 97mm x 156mm,3200,문구전2026,1,2,matcha_latte_strawberry_sticker.jpg
+3,블루 레몬 에이드와 바다 씰스티커,유포지 무광 · 97mm x 156mm,3200,문구전2026,1,3,swimsuit_1_sticker.jpg
+4,수박 주스와 꽃 한 송이 씰스티커,유포지 무광 · 97mm x 156mm,3200,문구전2026,1,4,swimsuit_2_sticker.jpg
+5,우주 아쿠아리움 냥이끼끼 씰스티커,유포지 무광 · 97mm x 156mm,3200,수일코2026,1,5,space_aquarium_kitty.jpg
+6,레드핑크 딸기 끼끼 씰스티커,유포지 무광 · 97mm x 156mm,3000,수일코2026,1,6,redpink_strawberry_kiki.jpg
+7,소다 메론 체리 냥이끼끼 씰스티커,유포지 무광 · 97mm x 156mm,3000,수일코2026,1,7,soda_melon_cherry_kitty.jpg
+8,키치메디컬 냥이끼끼 씰스티커,유포지 무광 · 97mm x 156mm,3000,수일코2026,1,8,kitsch_medical_kitty.jpg
+9,딸기 모조지,칼선 모조지 세트 1/4 · 76mm x 96mm,2000,수일코2026,2,9,mojoji_1.jpg
+10,해마 모조지,칼선 모조지 세트 2/4 · 76mm x 96mm,2000,수일코2026,2,9,mojoji_2.jpg
+11,주사기 모조지,칼선 모조지 세트 3/4 · 76mm x 96mm,2000,수일코2026,2,9,mojoji_3.jpg
+12,메론 소다 모조지,칼선 모조지 세트 4/4 · 76mm x 96mm,2000,수일코2026,2,9,mojoji_4.jpg
+13,푸딩 모조지,모조지 덤스티커 · 70mm x 90mm,500,수일코2026,2,9,mojoji_5.jpg
+14,레몬코어 미니 씰스티커,유포지 무광 덤스티커 · 63mm x 77mm,0,문구전2026,3,,lemontang_seals.jpg
+15,여름날 미니 씰스티커1,유포지 무광 덤스티커 · 63mm x 77mm,0,수일코2026,3,,summer_mini_seal_1.jpg
+16,여름날 미니 씰스티커2,유포지 무광 덤스티커 · 63mm x 77mm,0,수일코2026,3,,summer_mini_seal_2.jpg
+17,인스타그램 팔로우 이벤트 도무송,덤도무송스티커 · 50mm x 80mm,0,수일코2026,4,,inpal_domusong.jpg
+18,블루 레몬 에이드와 바다 배경 사진,,,,10,,bg_adil-photos-seascape-4788749.jpg
+19,블루 레몬 에이드와 바다 배경 사진,,,,10,,bg_claudia14-dolphin-203875.jpg
+20,수박 주스와 꽃 한 송이 배경 사진,,,,10,,bg_dyunmv-trees-5033072.jpg
+21,레몬코어 미니 배경 사진,,,,10,,bg_hans-lemon-1117565.jpg
+22,수박 주스와 꽃 한 송이 배경 사진,,,,10,,bg_jancickal-palm-5408169.jpg
+23,레몬코어 미니 배경 사진,,,,10,,bg_ptrabattoni-summer-361112.jpg
+24,레몬코어 미니 배경 사진,,,,10,,bg_queven-lemon-4982692.jpg
+25,수박 주스와 꽃 한 송이 배경 사진,,,,10,,bg_raitrainer-palm-trees-383498.jpg
+26,블루 레몬 에이드와 바다 배경 사진,,,,10,,bg_ranerd-sea-5751723.jpg
+27,민트라떼에 초코 한 스푼 배경 사진,,,,10,,bg_sabinevanerp-doors-3117027.jpg
+28,블루 레몬 에이드와 바다 배경 사진,,,,10,,bg_stocksnap-beach-2562563.jpg
+29,수박 주스와 꽃 한 송이 배경 사진,,,,10,,bg_walkerssk-la-digue-4710130.jpg

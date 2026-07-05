@@ -1,19 +1,8 @@
-const CSV_PATH = "./data/works.csv";
-const WORK_IMAGE_BASE_PATH = "./assets/works/";
-
 const workGrid = document.querySelector("#workGrid");
 
 async function loadWorks() {
   try {
-    const response = await fetch(CSV_PATH);
-
-    if (!response.ok) {
-      throw new Error(`CSV load failed: ${response.status}`);
-    }
-
-    const csvText = await response.text();
-    const rows = parseCSV(csvText);
-    const products = groupIntoProducts(rows);
+    const products = await fetchProducts();
 
     renderWorks(shuffle(products));
   } catch (error) {
@@ -26,119 +15,39 @@ async function loadWorks() {
   }
 }
 
-function parseCSV(csvText) {
-  const lines = csvText
-    .trim()
-    .split(/\r?\n/)
-    .filter(Boolean);
-
-  const headers = lines[0].split(",").map((header) => header.trim());
-
-  return lines.slice(1).map((line) => {
-    const values = splitCSVLine(line);
-
-    return headers.reduce((acc, header, index) => {
-      acc[header] = values[index]?.trim() ?? "";
-      return acc;
-    }, {});
-  });
-}
-
-function splitCSVLine(line) {
-  const result = [];
-  let current = "";
-  let insideQuotes = false;
-
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
-
-    if (char === '"') {
-      insideQuotes = !insideQuotes;
-    } else if (char === "," && !insideQuotes) {
-      result.push(current);
-      current = "";
-    } else {
-      current += char;
-    }
-  }
-
-  result.push(current);
-  return result;
-}
-
-function shuffle(array) {
-  const result = [...array];
-
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-
-  return result;
-}
-
-function groupIntoProducts(rows) {
-  const productsByNo = new Map();
-
-  rows.forEach((row) => {
-    if (!productsByNo.has(row.no)) {
-      productsByNo.set(row.no, {
-        no: row.no,
-        name: row.name,
-        memo: row.memo,
-        price: row.price,
-        exhibition: row.exhibition,
-        is_sale: row.is_sale,
-        images: [],
-      });
-    }
-
-    productsByNo.get(row.no).images.push({
-      file_name: row.file_name,
-      is_picture: String(row.is_picture).toLowerCase() === "true",
-    });
-  });
-
-  return Array.from(productsByNo.values());
-}
-
 function renderWorks(products) {
   workGrid.innerHTML = "";
 
-  products.forEach((product) => {
-    const isSale = String(product.is_sale).toLowerCase() === "true";
-    const mainImage = product.images.find((image) => !image.is_picture);
+  products
+    .filter((product) => product.category !== BACKGROUND_CATEGORY)
+    .forEach((product) => {
+      const mainImage = product.images[0];
 
-    if (!mainImage) return;
+      if (!mainImage) return;
 
-    const item = document.createElement("figure");
-    item.className = "work-item";
-    if (isSale) item.classList.add("sale");
+      const item = document.createElement("figure");
+      item.className = "work-item sale";
 
-    item.dataset.no = product.no;
-    item.dataset.name = product.name;
-    item.dataset.memo = product.memo;
-    item.dataset.price = product.price;
-    item.dataset.exhibition = product.exhibition;
-    item.dataset.isSale = isSale;
+      item.dataset.no = product.no;
+      item.dataset.name = product.name;
+      item.dataset.memo = product.memo;
+      item.dataset.price = product.price;
+      item.dataset.exhibition = product.exhibition;
+      item.dataset.category = product.category;
 
-    const showNameOverlay = !mainImage.is_picture && isSale;
+      item.innerHTML = `
+        <img
+          src="${WORK_IMAGE_BASE_PATH}${mainImage.file_name}"
+          alt="${product.name || "archive image"}"
+          loading="lazy"
+        />
+        <figcaption class="work-name-overlay"><span>${product.name}</span></figcaption>
+      `;
 
-    item.innerHTML = `
-      <img
-        src="${WORK_IMAGE_BASE_PATH}${mainImage.file_name}"
-        alt="${product.name || "archive image"}"
-        loading="lazy"
-      />
-      ${showNameOverlay ? `<figcaption class="work-name-overlay"><span>${product.name}</span></figcaption>` : ""}
-    `;
-
-    if (isSale) {
       item.addEventListener("click", () => openSaleDetail(product));
-    }
 
-    workGrid.appendChild(item);
-  });
+      workGrid.appendChild(item);
+    });
 }
 
 function openSaleDetail(work) {
