@@ -1,0 +1,5 @@
+name,file_name,memo,exhibition,is_sale
+work001,work_001.jpg,첫 번째 작업,2024 봄 전시,true
+work002,work_002.jpg,두 번째 작업,,false
+work003,work_003.jpg,세 번째 작업,,false
+work004,work_004.jpg,네 번째 작업,2023 겨울 전시,true
