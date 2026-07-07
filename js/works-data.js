@@ -1,18 +1,25 @@
-const CSV_PATH = "./data/works.csv";
+const PRODUCTS_CSV_PATH = "./data/products.csv";
+const IMAGES_CSV_PATH = "./data/images.csv";
 const WORK_IMAGE_BASE_PATH = "./assets/works/";
-const BACKGROUND_CATEGORY = "10";
 
 async function fetchProducts() {
-  const response = await fetch(CSV_PATH);
+  const [productRows, imageRows] = await Promise.all([
+    fetchCSV(PRODUCTS_CSV_PATH),
+    fetchCSV(IMAGES_CSV_PATH),
+  ]);
+
+  return joinProductsWithImages(productRows, imageRows);
+}
+
+async function fetchCSV(path) {
+  const response = await fetch(path);
 
   if (!response.ok) {
-    throw new Error(`CSV load failed: ${response.status}`);
+    throw new Error(`CSV load failed: ${response.status} (${path})`);
   }
 
   const csvText = await response.text();
-  const rows = parseCSV(csvText);
-
-  return groupIntoProducts(rows);
+  return parseCSV(csvText);
 }
 
 function parseCSV(csvText) {
@@ -55,31 +62,20 @@ function splitCSVLine(line) {
   return result;
 }
 
-function groupIntoProducts(rows) {
-  const productsByKey = new Map();
-
-  rows.forEach((row) => {
-    const key = row.no;
-
-    if (!productsByKey.has(key)) {
-      productsByKey.set(key, {
-        no: row.no,
-        name: row.name,
-        memo: row.memo,
-        price: row.price,
-        exhibition: row.exhibition,
-        category: row.category,
-        product: row.product,
-        images: [],
-      });
-    }
-
-    productsByKey.get(key).images.push({
-      file_name: row.file_name,
-    });
-  });
-
-  return Array.from(productsByKey.values());
+function joinProductsWithImages(productRows, imageRows) {
+  return productRows.map((product) => ({
+    no: product.no,
+    name: product.name,
+    description: product.description,
+    memo: product.memo,
+    price: product.price,
+    exhibition: product.exhibition,
+    category: product.category,
+    product: product.product,
+    images: imageRows
+      .filter((image) => image.no === product.no)
+      .map((image) => ({ file_name: image.file_name, type: image.type })),
+  }));
 }
 
 function shuffle(array) {

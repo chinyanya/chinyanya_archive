@@ -4,6 +4,7 @@ const sectionsContainer = document.querySelector("#carouselSections");
 const CATEGORY_SECTIONS = [
   { title: "SEAL STICKER", categories: ["1"], order: ["3", "4", "2", "1", "5", "7", "6", "8"] },
   { title: "MEMO STICKER", categories: ["2"] },
+  { title: "KEYRING", categories: ["5"] },
   { title: "ETC", categories: ["3", "4"] },
 ];
 
@@ -12,9 +13,8 @@ let sections = [];
 async function loadExplore() {
   try {
     const products = await fetchProducts();
-    const sellableProducts = products.filter((product) => product.category !== BACKGROUND_CATEGORY);
 
-    renderSections(sellableProducts);
+    renderSections(products);
   } catch (error) {
     console.error(error);
     sectionsContainer.innerHTML = `
@@ -70,10 +70,12 @@ function sortByOrder(products, order) {
 
 function renderCarouselItems(track, products) {
   const items = [];
+  const displayedProducts = products.filter((product) =>
+    product.images.some((image) => image.type === "main")
+  );
 
-  products.forEach((product) => {
-    const mainImage = product.images[0];
-    if (!mainImage) return;
+  displayedProducts.forEach((product) => {
+    const mainImage = product.images.find((image) => image.type === "main");
 
     const item = document.createElement("div");
     item.className = "carousel-item";
@@ -92,7 +94,13 @@ function renderCarouselItems(track, products) {
       <p class="carousel-price">${formatPrice(product.price)}</p>
     `;
 
-    item.addEventListener("click", () => centerItem(item, true));
+    item.addEventListener("click", () => {
+      if (item.classList.contains("active")) {
+        openDetailPopup(product, displayedProducts);
+      } else {
+        centerItem(item, true);
+      }
+    });
 
     track.appendChild(item);
     items.push(item);

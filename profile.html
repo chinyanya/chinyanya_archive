@@ -28,11 +28,52 @@
   </header>
 
   <main>
-    <section class="page-section">
-      <div class="empty-page">
-        <p>Profile page — 다음에 채울 예정</p>
+    <section class="page-section profile-section">
+      <div class="profile-intro">
+        <p class="profile-handle">CHICO (치코)</p>
+        <p class="profile-nickname">@chiconyanya</p>
+        <a
+          class="profile-instagram-link"
+          href="https://www.instagram.com/chiconyanya/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Instagram</a>
+      </div>
+
+      <div class="profile-exhibitions">
+        <article class="profile-exhibition-card">
+          <img
+            src="./assets/profile/pic_suwon.jpg"
+            alt="수일코 2026 부스 사진"
+            class="profile-exhibition-image"
+            loading="lazy"
+          />
+          <div class="profile-exhibition-info">
+            <h3 class="profile-exhibition-name">수일코 H-108</h3>
+            <p class="profile-exhibition-detail">2026 수원 일러스트코리아 Summer</p>
+            <p class="profile-exhibition-detail">2026.06.05(금) - 06.07(일)</p>
+            <p class="profile-exhibition-detail">수원메쎄</p>
+          </div>
+        </article>
+
+        <article class="profile-exhibition-card profile-exhibition-card-clickable" id="munguCard">
+          <img
+            src="./assets/profile/pic_mungu.jpg"
+            alt="문구전 2026 여름 부스 사진"
+            class="profile-exhibition-image"
+            loading="lazy"
+          />
+          <div class="profile-exhibition-info">
+            <h3 class="profile-exhibition-name">문구전 CV06</h3>
+            <p class="profile-exhibition-detail">문구전 2026 여름</p>
+            <p class="profile-exhibition-detail">2026.07.04 - 07.05 (2일간)</p>
+            <p class="profile-exhibition-detail">양재 aT센터</p>
+          </div>
+        </article>
       </div>
     </section>
   </main>
+
+  <script src="./js/profile-gallery.js"></script>
 </body>
 </html>
